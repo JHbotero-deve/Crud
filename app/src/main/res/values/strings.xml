@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Gestor CRUD</string>
+
+    <!-- Navegación -->
+    <string name="nav_products">Productos</string>
+    <string name="nav_tasks">Tareas</string>
+
+    <!-- Productos -->
+    <string name="product_code">Código: %1$d</string>
+    <string name="product_price">Precio: %1$.2f</string>
+    <string name="product_edit">Editar Producto</string>
+    <string name="product_save">Guardar</string>
+    <string name="product_cancel">Cancelar</string>
+    <string name="product_updated_success">¡Actualizado con éxito!</string>
+    <string name="product_loading_error">Error en la carga del producto</string>
+    <string name="product_retry">Reintentar</string>
+
+    <!-- Tareas -->
+    <string name="task_new_hint">Nueva tarea</string>
+    <string name="task_add">Agregar</string>
+    <string name="task_delete_desc">Eliminar</string>
+    <string name="task_error">Error: %1$s</string>
+</resources>
