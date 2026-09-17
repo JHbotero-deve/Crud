@@ -19,4 +19,8 @@ class ProductRepositoryImpl @Inject constructor(
         val response = api.updateProduct(product.id, product.toData())
         return response.toDomain()
     }
+    override suspend fun deleteProduct(id: Int): ProductModel {
+        val response = api.deleteProduct(id)
+        return response.toDomain()
+    }
 }

@@ -3,6 +3,7 @@ package com.sena.crud.ui.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sena.crud.domain.model.ProductModel
+import com.sena.crud.domain.useCase.DeleteProductUseCase
 import com.sena.crud.domain.useCase.GetProductUseCase
 import com.sena.crud.domain.useCase.UpdateProductUseCase
 import com.sena.crud.ui.state.ProductUIState
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductViewModel @Inject constructor(
     private val getProductUseCase: GetProductUseCase,
-    private val updateProductUseCase: UpdateProductUseCase
+    private val updateProductUseCase: UpdateProductUseCase,
+    private val deleteProductUseCase: DeleteProductUseCase
 ): ViewModel() {
     private val _uiState = MutableStateFlow(ProductUIState())
     val uiState: StateFlow<ProductUIState> = _uiState.asStateFlow()
@@ -71,6 +73,29 @@ class ProductViewModel @Inject constructor(
                     it.copy(
                         isUpdating = false,
                         errorMessage = e.message ?: "Error al actualizar el producto"
+                    )
+                }
+            }
+        }
+    }
+
+    fun deleteProduct(id: Int) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+            try {
+                deleteProductUseCase(id)
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        product = null,
+                        errorMessage = "Producto eliminado correctamente"
+                    )
+                }
+            } catch (e: Exception) {
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        errorMessage = e.message ?: "Error al eliminar"
                     )
                 }
             }

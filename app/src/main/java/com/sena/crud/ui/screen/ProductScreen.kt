@@ -20,6 +20,7 @@ fun ProductScreen(
     ProductDetails(
         uiState = uiState,
         onRetry = { viewModel.getProductById(productId) },
-        onUpdate = { product -> viewModel.updateProduct(product) }
+        onUpdate = { product -> viewModel.updateProduct(product) },
+        onDelete = { id -> viewModel.deleteProduct(id) }
     )
 }

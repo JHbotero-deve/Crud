@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -35,7 +36,8 @@ import com.sena.crud.ui.state.ProductUIState
 fun ProductDetails(
     uiState: ProductUIState,
     onRetry: () -> Unit,
-    onUpdate: (ProductModel) -> Unit
+    onUpdate: (ProductModel) -> Unit,
+    onDelete: (Int) -> Unit
 ) {
     var isEditing by remember { mutableStateOf(false) }
 
@@ -88,8 +90,21 @@ fun ProductDetails(
                         Text(text = stringResource(R.string.product_updated_success), color = Color.Green)
                         Spacer(modifier = Modifier.height(8.dp))
                     }
-                    Button(onClick = { isEditing = true }) {
+                    Button(
+                        onClick = { isEditing = true },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
                         Text(text = stringResource(R.string.product_edit))
+                    }
+                    
+                    Spacer(modifier = Modifier.height(8.dp))
+                    
+                    Button(
+                        onClick = { onDelete(uiState.product.id) },
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+                    ) {
+                        Text(text = "Eliminar Producto", color = Color.White)
                     }
                 }
             }
